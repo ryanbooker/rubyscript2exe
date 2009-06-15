@@ -57,32 +57,30 @@ module REQUIRE2LIB
       Dir.mkdir(File.expand_path("rubyscript2exe.gems/gems", LIBDIR))
       Dir.mkdir(File.expand_path("rubyscript2exe.gems/specifications", LIBDIR))
 
-      Gem.loaded_specs.each do |gem|
-        if gem.loaded?
-          $stderr.puts "Found gem #{gem.name} (#{gem.version})."	if VERBOSE
+      Gem.loaded_specs.each do |key, gem|
+        $stderr.puts "Found gem #{gem.name} (#{gem.version})."	if VERBOSE
 
-          fromdir	= File.join(gem.installation_path, "specifications")
-          todir		= File.expand_path("rubyscript2exe.gems/specifications", LIBDIR)
+        fromdir	= File.join(gem.installation_path, "specifications")
+        todir		= File.expand_path("rubyscript2exe.gems/specifications", LIBDIR)
 
-          fromfile	= File.join(fromdir, "#{gem.full_name}.gemspec")
-          tofile	= File.join(todir, "#{gem.full_name}.gemspec")
+        fromfile	= File.join(fromdir, "#{gem.full_name}.gemspec")
+        tofile	= File.join(todir, "#{gem.full_name}.gemspec")
 
-          File.copy(fromfile, tofile)
+        File.copy(fromfile, tofile)
 
-          fromdir	= gem.full_gem_path
-          todir		= File.expand_path(File.join("rubyscript2exe.gems/gems", gem.full_name), LIBDIR)
+        fromdir	= gem.full_gem_path
+        todir		= File.expand_path(File.join("rubyscript2exe.gems/gems", gem.full_name), LIBDIR)
 
-          Dir.copy(fromdir, todir)
+        Dir.copy(fromdir, todir)
 
-          Dir.find(todir).each do |file|
-            if File.file?(file)
-              gem.require_paths.each do |lib|
-                unless lib.empty?
-                  lib	= File.expand_path(lib, todir)
-                  lib	= lib + "/"
-
-                  requireablefiles << file[lib.length..-1]	if file =~ /^#{lib}/
-                end
+        Dir.find(todir).each do |file|
+          if File.file?(file)
+            gem.require_paths.each do |lib|
+              unless lib.empty?
+                lib	= File.expand_path(lib, todir)
+                lib	= lib + "/"
+                
+                requireablefiles << file[lib.length..-1]	if file =~ /^#{lib.gsub('+', '\+')}/
               end
             end
           end
