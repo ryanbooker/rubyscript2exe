@@ -18,7 +18,7 @@ require2lib.rb has been updated so that gem specs are now loaded via
 Gem.loaded_specs rather than via Gem::Specifications.list. 
 
 I've released this as it appears the original project is no longer
-being maintained. Feel free to pull this into any authoratative
+being maintained. Feel free to pull this into any authoritative
 branch that may exist.
 
 
