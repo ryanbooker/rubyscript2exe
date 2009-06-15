@@ -1,0 +1,30 @@
+= RubyScript2Exe
+
+Original Code: http://www.erikveen.dds.nl/rubyscript2exe
+
+RubyScript2Exe compiles your application's Ruby script archive
+(created with Tar2RubyScript) into a standalone compressed 
+Windows, Linux or Mac OS X (Darwin) executable. You
+can look at it as a "compiler". Not in the sense of a
+source-code-to-byte-code compiler, but as a "collector", for it
+collects all necessary files to run your script on another
+machine: the Ruby script, the Ruby interpreter and the Ruby
+runtime library (stripped down for this script).
+
+
+== Updated to handle Ruby 1.8.7
+
+require2lib.rb has been updated so that gem specs are now loaded via
+Gem.loaded_specs rather than via Gem::Specifications.list. 
+
+I've released this as it appears the original project is no longer
+being maintained. Feel free to pull this into any authoratative
+branch that may exist.
+
+
+== Building
+
+To build the repository you need to use Tar2RubyScript
+http://github.com/ryanbooker/tar2rubyscript:
+
+  ruby tar2rubyscript.rb rubyscript2exe/
