@@ -11,6 +11,9 @@ collects all necessary files to run your script on another
 machine: the Ruby script, the Ruby interpreter and the Ruby
 runtime library (stripped down for this script).
 
+You may also be interested in Ocra. A similar project that is
+actively maintained: http://ocra.rubyforge.org/
+
 
 == Updated to handle Ruby 1.8.7
 
