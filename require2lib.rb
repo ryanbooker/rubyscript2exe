@@ -21,8 +21,8 @@ module REQUIRE2LIB
   THISFILE	= File.expand_path(__FILE__)
   LIBDIR	= File.expand_path((ENV["REQUIRE2LIB_LIBDIR"] or "."))
   LOADSCRIPT	= File.expand_path((ENV["REQUIRE2LIB_LOADSCRIPT"] or "."))
-  RUBYLIBDIR	= Config::CONFIG["rubylibdir"]
-  SITELIBDIR	= Config::CONFIG["sitelibdir"]
+  RUBYLIBDIR	= RbConfig::CONFIG["rubylibdir"]
+  SITELIBDIR	= RbConfig::CONFIG["sitelibdir"]
 
   at_exit do
     Dir.chdir(ORGDIR)
@@ -33,7 +33,7 @@ module REQUIRE2LIB
   def self.gatherlibs
     $stderr.puts "Gathering files..."	unless QUIET
 
-    File.makedirs(LIBDIR)
+    FileUtils.makedirs(LIBDIR)
 
     if RUBYGEMS
       begin
@@ -66,7 +66,7 @@ module REQUIRE2LIB
         fromfile	= File.join(fromdir, "#{gem.full_name}.gemspec")
         tofile	= File.join(todir, "#{gem.full_name}.gemspec")
 
-        File.copy(fromfile, tofile)
+        FileUtils.copy(fromfile, tofile)
 
         fromdir	= gem.full_gem_path
         todir		= File.expand_path(File.join("rubyscript2exe.gems/gems", gem.full_name), LIBDIR)
@@ -79,7 +79,7 @@ module REQUIRE2LIB
               unless lib.empty?
                 lib	= File.expand_path(lib, todir)
                 lib	= lib + "/"
-                
+
                 requireablefiles << file[lib.length..-1]	if file =~ /^#{lib.gsub('+', '\+')}/
               end
             end
@@ -102,8 +102,8 @@ module REQUIRE2LIB
                    (JUSTSITELIB and fromfile.include?(SITELIBDIR))
                   $stderr.puts "Found #{fromfile} ."		if VERBOSE
 
-                  File.makedirs(File.dirname(tofile))	unless File.directory?(File.dirname(tofile))
-                  File.copy(fromfile, tofile)
+                  FileUtils.makedirs(File.dirname(tofile))	unless File.directory?(File.dirname(tofile))
+                  FileUtils.copy(fromfile, tofile)
 
                   pureruby	= false	unless req =~ /\.(rbw?|ruby)$/i
                 else

@@ -8,7 +8,7 @@
 
 0.5.3 - 29.05.2007
 
-* Added a bit of Config::CONFIG magic to make RubyScript2Exe
+* Added a bit of RbConfig::CONFIG magic to make RubyScript2Exe
   work with RubyGems >= 0.9.3.
 
 * Moved the embedded bin directory to the front of $PATH.
@@ -151,7 +151,7 @@
 * Added --rubyscript2exe-tk (experimental).
 
 * Added a check for the existence of
-  Config::CONFIG["bindir"]/ruby (RubyScript2Exe doesn't work
+  RbConfig::CONFIG["bindir"]/ruby (RubyScript2Exe doesn't work
   without it...).
 
 * Fixed a bug concerning program arguments with spaces on

@@ -66,7 +66,7 @@ def ldds(file, notthedefaults=true)
     todo	= []
 
     todo2.each do |file|
-      File.copy(file, tempfile)		# Libraries on Debian are no executables.
+      FileUtils.copy(file, tempfile)		# Libraries on Debian are no executables.
       File.chmod(0755, tempfile)
 
       libs	= `ldd #{tempfile}`.split(/\r*\n/).collect{|line| line.split(/\s+/)[3]}			if linux?
