@@ -39,7 +39,7 @@ def cygwin?
 end
 
 def target_os
-  Config::CONFIG["target_os"] or ""
+  RbConfig::CONFIG["target_os"] or ""
 end
 
 def copyto(files, dest)
@@ -48,7 +48,7 @@ def copyto(files, dest)
 
     $stderr.puts "Copying #{fromfile} ..."	if VERBOSE
 
-    File.copy(fromfile, tofile)			unless File.file?(tofile)
+    FileUtils.copy(fromfile, tofile)			unless File.file?(tofile)
   end
 end
 
@@ -100,8 +100,8 @@ if script.nil?
   exit 1
 end
 
-bindir1	= Config::CONFIG["bindir"]
-libdir1	= Config::CONFIG["libdir"]
+bindir1	= RbConfig::CONFIG["bindir"]
+libdir1	= RbConfig::CONFIG["libdir"]
 bindir2	= tmplocation("bin/")
 libdir2	= tmplocation("lib/")
 appdir2	= tmplocation("app/")
@@ -261,32 +261,32 @@ File.open(tmplocation("bootstrap.rb"), "w") do |f|
 
   f.puts "require 'rbconfig'"
 
-  f.puts "Config::CONFIG['archdir']		= dir + '/lib'"					# /usr/local/lib/ruby/1.8/i686-linux
-  f.puts "Config::CONFIG['bindir']		= dir + '/bin'"					# /usr/local/bin
-  f.puts "Config::CONFIG['datadir']		= dir + '/share'"				# /usr/local/share
-  f.puts "Config::CONFIG['datarootdir']		= dir + '/share'"				# /usr/local/share
-  f.puts "Config::CONFIG['docdir']		= dir + '/share/doc/$(PACKAGE)'"		# /usr/local/share/doc/$(PACKAGE)
-  f.puts "Config::CONFIG['dvidir']		= dir + '/share/doc/$(PACKAGE)'"		# /usr/local/share/doc/$(PACKAGE)
-  f.puts "Config::CONFIG['exec_prefix']		= dir + ''"					# /usr/local
-  f.puts "Config::CONFIG['htmldir']		= dir + '/share/doc/$(PACKAGE)'"		# /usr/local/share/doc/$(PACKAGE)
-  f.puts "Config::CONFIG['includedir']		= dir + '/include'"				# /usr/local/include
-  f.puts "Config::CONFIG['infodir']		= dir + '/share/info'"				# /usr/local/share/info
-  f.puts "Config::CONFIG['libdir']		= dir + '/lib'"					# /usr/local/lib
-  f.puts "Config::CONFIG['libexecdir']		= dir + '/libexec'"				# /usr/local/libexec
-  f.puts "Config::CONFIG['localedir']		= dir + '/share/locale'"			# /usr/local/share/locale
-  f.puts "Config::CONFIG['localstatedir']	= dir + '/var'"					# /usr/local/var
-  f.puts "Config::CONFIG['mandir']		= dir + '/share/man'"				# /usr/local/share/man
-  f.puts "Config::CONFIG['pdfdir']		= dir + '/share/doc/$(PACKAGE)'"		# /usr/local/share/doc/$(PACKAGE)
-  f.puts "Config::CONFIG['prefix']		= dir + ''"					# /usr/local
-  f.puts "Config::CONFIG['psdir']		= dir + '/share/doc/$(PACKAGE)'"		# /usr/local/share/doc/$(PACKAGE)
-  f.puts "Config::CONFIG['rubylibdir']		= dir + '/lib'"					# /usr/local/lib/ruby/1.8
-  f.puts "Config::CONFIG['sbindir']		= dir + '/sbin'"				# /usr/local/sbin
-  f.puts "Config::CONFIG['sharedstatedir']	= dir + '/com'"					# /usr/local/com
-  f.puts "Config::CONFIG['sitearchdir']		= dir + '/lib'"					# /usr/local/lib/ruby/site_ruby/1.8/i686-linux
-  f.puts "Config::CONFIG['sitedir']		= dir + '/lib'"					# /usr/local/lib/ruby/site_ruby
-  f.puts "Config::CONFIG['sitelibdir']		= dir + '/lib'"					# /usr/local/lib/ruby/site_ruby/1.8
-  f.puts "Config::CONFIG['sysconfdir']		= dir + '/etc'"					# /usr/local/etc
-  f.puts "Config::CONFIG['topdir']		= dir + '/lib'"					# /usr/local/lib/ruby/1.8/i686-linux
+  f.puts "RbConfig::CONFIG['archdir']		= dir + '/lib'"					# /usr/local/lib/ruby/1.8/i686-linux
+  f.puts "RbConfig::CONFIG['bindir']		= dir + '/bin'"					# /usr/local/bin
+  f.puts "RbConfig::CONFIG['datadir']		= dir + '/share'"				# /usr/local/share
+  f.puts "RbConfig::CONFIG['datarootdir']		= dir + '/share'"				# /usr/local/share
+  f.puts "RbConfig::CONFIG['docdir']		= dir + '/share/doc/$(PACKAGE)'"		# /usr/local/share/doc/$(PACKAGE)
+  f.puts "RbConfig::CONFIG['dvidir']		= dir + '/share/doc/$(PACKAGE)'"		# /usr/local/share/doc/$(PACKAGE)
+  f.puts "RbConfig::CONFIG['exec_prefix']		= dir + ''"					# /usr/local
+  f.puts "RbConfig::CONFIG['htmldir']		= dir + '/share/doc/$(PACKAGE)'"		# /usr/local/share/doc/$(PACKAGE)
+  f.puts "RbConfig::CONFIG['includedir']		= dir + '/include'"				# /usr/local/include
+  f.puts "RbConfig::CONFIG['infodir']		= dir + '/share/info'"				# /usr/local/share/info
+  f.puts "RbConfig::CONFIG['libdir']		= dir + '/lib'"					# /usr/local/lib
+  f.puts "RbConfig::CONFIG['libexecdir']		= dir + '/libexec'"				# /usr/local/libexec
+  f.puts "RbConfig::CONFIG['localedir']		= dir + '/share/locale'"			# /usr/local/share/locale
+  f.puts "RbConfig::CONFIG['localstatedir']	= dir + '/var'"					# /usr/local/var
+  f.puts "RbConfig::CONFIG['mandir']		= dir + '/share/man'"				# /usr/local/share/man
+  f.puts "RbConfig::CONFIG['pdfdir']		= dir + '/share/doc/$(PACKAGE)'"		# /usr/local/share/doc/$(PACKAGE)
+  f.puts "RbConfig::CONFIG['prefix']		= dir + ''"					# /usr/local
+  f.puts "RbConfig::CONFIG['psdir']		= dir + '/share/doc/$(PACKAGE)'"		# /usr/local/share/doc/$(PACKAGE)
+  f.puts "RbConfig::CONFIG['rubylibdir']		= dir + '/lib'"					# /usr/local/lib/ruby/1.8
+  f.puts "RbConfig::CONFIG['sbindir']		= dir + '/sbin'"				# /usr/local/sbin
+  f.puts "RbConfig::CONFIG['sharedstatedir']	= dir + '/com'"					# /usr/local/com
+  f.puts "RbConfig::CONFIG['sitearchdir']		= dir + '/lib'"					# /usr/local/lib/ruby/site_ruby/1.8/i686-linux
+  f.puts "RbConfig::CONFIG['sitedir']		= dir + '/lib'"					# /usr/local/lib/ruby/site_ruby
+  f.puts "RbConfig::CONFIG['sitelibdir']		= dir + '/lib'"					# /usr/local/lib/ruby/site_ruby/1.8
+  f.puts "RbConfig::CONFIG['sysconfdir']		= dir + '/etc'"					# /usr/local/etc
+  f.puts "RbConfig::CONFIG['topdir']		= dir + '/lib'"					# /usr/local/lib/ruby/1.8/i686-linux
 
   f.puts "# Load eee.info"
 
@@ -370,7 +370,7 @@ from	= applocation(eeeexe)	unless File.file?(from)
 from	= oldlocation(eeeexe)	unless File.file?(from)
 to	= tmplocation(eeeexe)
 
-File.copy(from, to)	unless from == to
+FileUtils.copy(from, to)	unless from == to
 File.chmod(0755, to)	if linux? or darwin?
 
 tmplocation do
@@ -401,7 +401,7 @@ tmplocation do
   from	= eeebin1
   to	= eeebin2
 
-  File.copy(from, to)	unless from == to
+  FileUtils.copy(from, to)	unless from == to
   File.chmod(0755, to)	if linux? or darwin?
 
   system(backslashes("#{eeebin2} #{appeee} #{appexe}"))
@@ -410,7 +410,7 @@ end
 from	= tmplocation(appexe)
 to	= oldlocation(appexe)
 
-File.copy(from, to)	unless from == to
+FileUtils.copy(from, to)	unless from == to
 
 oldlocation do
   system(backslashes("reshacker -modify #{tmplocation(appexe)}, #{appexe}, #{appico}, icon,appicon,"))	if File.file?(appico) and (windows? or cygwin?)

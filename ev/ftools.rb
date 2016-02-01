@@ -1,4 +1,4 @@
-require "ftools"
+require "fileutils"
 
 class Dir
   def self.copy(from, to)
@@ -6,7 +6,7 @@ class Dir
       pdir	= Dir.pwd
       todir	= File.expand_path(to)
 
-      File.mkpath(todir)
+      FileUtils.mkpath(todir)
 
       Dir.chdir(from)
         Dir.open(".") do |dir|
@@ -18,9 +18,9 @@ class Dir
     else
       todir	= File.dirname(File.expand_path(to))
 
-      File.mkpath(todir)
+      FileUtils.mkpath(todir)
 
-      File.copy(from, to)
+      FileUtils.copy(from, to)
     end
   end
 
